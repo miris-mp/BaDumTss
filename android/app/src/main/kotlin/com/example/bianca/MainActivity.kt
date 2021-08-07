@@ -1,4 +1,4 @@
-package com.example.badumtss
+package com.example.bianca
 
 import io.flutter.embedding.android.FlutterActivity
 

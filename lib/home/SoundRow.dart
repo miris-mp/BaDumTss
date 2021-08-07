@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
+import "../model/Sound.dart";
+
 class SoundRow extends StatefulWidget {
-  const SoundRow({Key? key}) : super(key: key);
+  final Sound sound;
+
+  const SoundRow({Key? key, required this.sound}) : super(key: key);
 
   @override
   _SoundRowState createState() => _SoundRowState();
@@ -25,12 +29,14 @@ class _SoundRowState extends State<SoundRow> {
 
   @override
   Widget build(BuildContext context) {
+    print("Ciao");
+    print(widget.sound);
     final soundCard = new InkWell(
       child: Container(
         height: 124.0,
         margin: new EdgeInsets.only(left: 46.0),
         decoration: new BoxDecoration(
-          color: new Color(0xFF333366),
+          color: const Color(0xFFF44336),
           shape: BoxShape.rectangle,
           borderRadius: new BorderRadius.circular(8.0),
           boxShadow: <BoxShadow>[
@@ -42,11 +48,11 @@ class _SoundRowState extends State<SoundRow> {
           ],
         ),
         child: Center(
-            child: Text("BA DUM TSS",
+            child: Text(widget.sound.name,
                 style: TextStyle(fontSize: 20, color: Colors.white))),
       ),
       onTap: () async {
-        await player.setAsset('assets/audio/baDumTss.mp3');
+        await player.setAsset(widget.sound.sound);
         player.play();
       },
     );
@@ -56,11 +62,11 @@ class _SoundRowState extends State<SoundRow> {
         alignment: FractionalOffset.centerLeft,
         child: GestureDetector(
           onTap: () async {
-            await player.setAsset('assets/audio/baDumTss.mp3');
+            await player.setAsset(widget.sound.sound);
             player.play();
           },
           child: new Image(
-            image: new AssetImage("assets/img/baDumTss.png"),
+            image: new AssetImage(widget.sound.img),
             height: 92.0,
             width: 92.0,
           ),
